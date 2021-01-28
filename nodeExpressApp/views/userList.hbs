@@ -7,7 +7,10 @@
     </tr>
     {{#each allUsers}}
     <tr>
-        <td>{{this.firstName}} {{this.lastName}}</td>
+        <td>
+            <img src="/images/{{this._id}}.png" width="40" />
+            {{this.firstName}} {{this.lastName}}
+        </td>
         <td>
             <a href="/users/profile/{{this.id}}">Go to profile</a>
         </td>

@@ -9,5 +9,8 @@ router.get("/", function (req, res, next) {
 });
 
 router.get("/:user", JWT.checkToken, userController.getAllUsers);
+router.get("/profile/:user", JWT.checkToken, userController.getUserProfile);
+
+router.post("/upload", JWT.checkToken, userController.upload);
 
 module.exports = router;

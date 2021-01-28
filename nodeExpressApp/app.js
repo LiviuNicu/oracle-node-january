@@ -3,12 +3,13 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+const fileUpload = require("express-fileupload");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 const apiRouter = require("./routes/api");
 const authRouter = require("./routes/auth");
-
+// "mongodb+srv://demo:demo@cluster0.nvhvm.mongodb.net/demo?retryWrites=true&w=majority",
 const mongoose = require("mongoose");
 mongoose
   .connect(
@@ -20,7 +21,7 @@ mongoose
     }
   )
   .then(() => console.log("MONGODB CONNECTED"))
-  .catch(() => console.error("MONGODB CONNECTION ERROR"));
+  .catch((err) => console.error("MONGODB CONNECTION ERROR", err));
 
 var app = express();
 

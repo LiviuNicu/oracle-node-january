@@ -3,7 +3,13 @@ const userModel = require("../models/userModel");
 exports.getAllUsers = async function (req, res) {
   try {
     const allUsersResponse = await userModel.getAllUsers();
-    res.render("userList", { title: "Users", allUsers: allUsersResponse });
+    const loggedUser = await userModel.getUserById(req.params.user);
+    // const loggedUser = await userModel.getUserById(req.userData._id)
+    res.render("userList", {
+      title: "Users",
+      allUsers: allUsersResponse,
+      loggedUser,
+    });
   } catch (err) {}
 };
 

@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const crypto = require("crypto");
 const JWT = require("../middlewares/jwt");
+const { resolve } = require("path");
 
 const UserSchema = new Schema({
   email: { type: String, unique: true, required: true },
@@ -69,6 +70,18 @@ exports.getAllUsers = function () {
         reject({ err });
       } else {
         resolve(allUsers);
+      }
+    });
+  });
+};
+
+exports.getUserById = function (id) {
+  return new Promise((resolve, reject) => {
+    user.findOne({ _id: id }).exec(function (err, user) {
+      if (err) {
+        reject({ err });
+      } else {
+        resolve(user);
       }
     });
   });

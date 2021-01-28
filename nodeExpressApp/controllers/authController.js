@@ -12,7 +12,7 @@ exports.login = function (req, res) {
       res.redirect("/users/" + response.user._id);
     })
     .catch((err) => {
-      res.redirect("/auth/login", { title: "login", error: err.message });
+      res.render("login", { title: "login", error: err.message });
     });
 };
 

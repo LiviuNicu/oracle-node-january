@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const crypto = require("crypto");
+const JWT = require("../middlewares/jwt");
 
 const UserSchema = new Schema({
   email: { type: String, unique: true, required: true },
@@ -46,10 +47,28 @@ exports.login = function (userReq) {
         reject({ message: "user not found" }); // in production user more generic messages for security
       } else {
         if (user.hashed_password === hashPW(userReq.password)) {
-          resolve({ user });
+          const obj = {
+            email: user.email,
+            _id: user._id,
+          };
+
+          const token = JWT.getToken(obj);
+          resolve({ user, token });
         } else {
           reject({ message: "worng password" }); // in production user more generic messages for security
         }
+      }
+    });
+  });
+};
+
+exports.getAllUsers = function () {
+  return new Promise((resolve, reject) => {
+    user.find().exec(function (err, allUsers) {
+      if (err) {
+        reject({ err });
+      } else {
+        resolve(allUsers);
       }
     });
   });

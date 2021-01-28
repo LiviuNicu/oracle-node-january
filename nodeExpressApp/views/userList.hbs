@@ -4,6 +4,7 @@
     <tr>
         <td>Name</td>
         <td>Go to profile</td>
+        <td>Tasks</td>
     </tr>
     {{#each allUsers}}
     <tr>
@@ -13,6 +14,9 @@
         </td>
         <td>
             <a href="/users/profile/{{this.id}}">Go to profile</a>
+        </td>
+        <td>
+            <a href="/users/tasks/{{this.id}}">Go to taks</a>
         </td>
     </tr>
     {{/each}}

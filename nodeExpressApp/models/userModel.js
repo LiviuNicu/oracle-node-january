@@ -86,3 +86,5 @@ exports.getUserById = function (id) {
     });
   });
 };
+
+exports.User = user;
